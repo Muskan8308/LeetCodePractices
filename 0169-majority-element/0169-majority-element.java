@@ -2,7 +2,7 @@ class Solution {
     public int majorityElement(int[] nums) {
         int cnt = 1, ans = 0;
         int n = nums.length;
-        
+
         Arrays.sort(nums);
         for(int i = 0; i < n-1; i++)
         {
@@ -15,6 +15,6 @@ class Solution {
             else
                 cnt = 1;
         }
-        return ans;
+        return n == 1 ? nums[0] : ans;
     }
 }
