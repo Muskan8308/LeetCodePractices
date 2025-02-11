@@ -1,6 +1,7 @@
 class Solution {
     public int missingNumber(int[] nums) {
 
+        // 1st way
         int n = nums.length;
         // Arrays.sort(nums);
 
@@ -12,6 +13,7 @@ class Solution {
 
         // return n;
 
+        // 2nd way
         int sum1 = 0, sum2 = 0;
 
         // Sum of all value present in the array
