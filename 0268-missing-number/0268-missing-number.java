@@ -2,14 +2,30 @@ class Solution {
     public int missingNumber(int[] nums) {
 
         int n = nums.length;
-        Arrays.sort(nums);
+        // Arrays.sort(nums);
 
-        for(int i = 0; i < n; i++)
+        // for(int i = 0; i < n; i++)
+        // {
+        //     if(nums[i] != i)
+        //     return i;
+        // }
+
+        // return n;
+
+        int sum1 = 0, sum2 = 0;
+
+        // Sum of all value present in the array
+        for(int num : nums)
         {
-            if(nums[i] != i)
-            return i;
+            sum1 += num;
         }
 
-        return n;
+        // Sum of the range 
+        for(int i = 1; i <= n; i++)
+        {
+            sum2 += i;
+        }
+
+        return sum2 - sum1;
     }
 }
