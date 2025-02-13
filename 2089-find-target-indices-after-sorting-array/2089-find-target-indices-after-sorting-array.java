@@ -1,6 +1,21 @@
 class Solution {
     public List<Integer> targetIndices(int[] nums, int target) {
-        
+
+        // Sorting + Linear solution
+
+        if(nums == null || nums.length == 0) return List.of();     
+        Arrays.sort(nums);
+        List<Integer> list = new ArrayList<>();
+
+        for(int i = 0; i < nums.length; i++)
+        {
+            if(nums[i] == target)
+            list.add(i);
+        }
+
+        return list;
+
+    /*
         int s = 0, e = nums.length-1;
         List<Integer> list = new ArrayList<>();
         if(nums == null || nums.length == 0) return List.of();      // will return an empty list
@@ -22,5 +37,6 @@ class Solution {
         }
         Collections.sort(list);
         return list;
+    */
     }
 }
