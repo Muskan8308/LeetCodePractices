@@ -1,14 +1,14 @@
 class Solution {
     public int mySqrt(int x) {
         
-        int s = 0, e = x;
-        int ans = -1;
+        long s = 0, e = x;
+        long ans = -1;
         while(s <= e)
         {
-            int mid = s + (e-s)/2;
-            int val = mid * mid;
+            long mid = s + (e-s)/2;
+            long val = mid * mid;
             if(x == val)
-            return mid;
+            return (int)mid;
             else if(val < x)
             {
                 ans = mid;
@@ -19,6 +19,6 @@ class Solution {
                 e = mid-1;
             }
         }
-        return ans;
+        return (int)ans;
     }
 }
