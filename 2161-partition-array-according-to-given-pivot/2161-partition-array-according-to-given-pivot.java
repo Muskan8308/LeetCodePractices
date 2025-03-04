@@ -1,6 +1,34 @@
 class Solution {
     public int[] pivotArray(int[] nums, int pivot) {
-        
+
+        // 2nd appraoch
+
+        int n = nums.length;
+        int left = 0;
+        int[] res = new int[n];
+
+        for(int i = 0; i < n; i++)
+        {
+            if(nums[i] < pivot)
+            res[left++] = nums[i];
+        } 
+
+        for(int i = 0; i < n; i++)
+        {
+            if(nums[i] == pivot)
+            res[left++] = nums[i];
+        } 
+
+        for(int i = 0; i < n; i++)
+        {
+            if(nums[i] > pivot)
+            res[left++] = nums[i];
+        } 
+
+        return res;
+
+/*
+        // 1st approach
         int n = nums.length;
         ArrayList<Integer> a1 = new ArrayList<>();
         ArrayList<Integer> a2 = new ArrayList<>();
@@ -29,5 +57,6 @@ class Solution {
             nums[idx++] = a2.get(i);
 
         return nums;
+*/
     }
 }
