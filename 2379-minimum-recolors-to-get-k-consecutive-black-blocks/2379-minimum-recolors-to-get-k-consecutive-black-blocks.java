@@ -3,18 +3,14 @@ class Solution {
         
         int l = 0;
         int cnt = 0, minOp = Integer.MAX_VALUE;
-        StringBuilder str = new StringBuilder(blocks);
 
-        for(int r = k-1; r < str.length(); r++)
+        for(int r = k-1; r < blocks.length(); r++)
         {
             int i = l;
             while(i <= r)
             {
-                if(str.charAt(i) == 'W')
-                {
-                    
-                    cnt++;
-                }
+                if(blocks.charAt(i) == 'W')
+                cnt++;
                 i++;
             }
             minOp = Math.min(cnt, minOp);
