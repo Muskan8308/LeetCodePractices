@@ -18,7 +18,7 @@ class Solution {
                 str.delete(0, idx + 1);
             }
 
-            // Append the current character
+            // Append the current character in the str.
             str.append(currChar);
 
             // Update the maximum length
