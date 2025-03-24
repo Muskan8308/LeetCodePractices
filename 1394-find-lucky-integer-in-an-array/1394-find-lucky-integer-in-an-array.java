@@ -9,17 +9,15 @@ class Solution {
             freq[a]++;
         }
 
-        int maxi = arr[0];
         int largestMax = -1;
 
         // iterate the array to check for the largest lucky number
 
-        for(int i = 0; i < arr.length; i++)
+        for(int i = 1; i < 501; i++)
         {
-            if(arr[i] == freq[arr[i]])
+            if(i == freq[i])
             {
-                maxi = arr[i];
-                largestMax = Math.max(maxi, largestMax);
+                largestMax = i;
             }
         }
         return largestMax;
