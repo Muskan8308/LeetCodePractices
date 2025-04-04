@@ -1,9 +1,9 @@
 class Solution {
     public double myPow(double x, int n) {
         
+        // making power positive
         long N = n;
-
-        if(N < 0)   //  For negative n
+        if(N < 0)
         {
             x = 1 / x;
             N = -N;
@@ -11,11 +11,13 @@ class Solution {
         return power(x, N);
     }
 
-    double power(double x, long n)
+    double power(double x, long N)
     {
-        if(n == 0)  return 1;
-        double ans = power(x, n/2);
-        if(n % 2 == 0)
+        if(N == 0)
+        return 1;
+
+        double ans = power(x, N/2);
+        if(N % 2 == 0)
         return ans * ans;
         else
         return ans * ans * x;
