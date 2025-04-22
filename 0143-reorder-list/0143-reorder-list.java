@@ -10,7 +10,8 @@
  */
 class Solution {
     public void reorderList(ListNode head) {
-        
+        if (head == null || head.next == null) return; // base case
+ 
         ListNode t1 = head;
         // find left middle
         ListNode slow = head, fast = head;
