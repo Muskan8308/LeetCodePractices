@@ -19,16 +19,14 @@ class Solution {
         {
             if(temp1.val < temp2.val)
             {
-                ListNode a = new ListNode(temp1.val);
-                temp.next = a;
-                temp = a;
+                temp.next = temp1;
+                temp = temp1;
                 temp1 = temp1.next;
             }
-            else
+            else        // this will cover all duplicate elements
             {
-                ListNode a = new ListNode(temp2.val);
-                temp.next = a;
-                temp = a;
+                temp.next = temp2;
+                temp = temp2;
                 temp2 = temp2.next;
             }
         }
