@@ -1,59 +1,55 @@
 class MinStack {
-    
-    Node head;
-    int size;
+    Stack<Long> st = new Stack<>();
+    long min = -1;
 
     public MinStack() {
-        head = null;
-        size = 0;
+        
     }
     
     public void push(int val) {
-        Node t = new Node(val);
-        t.next = head;
-        head = t;
-        size++;
+        
+        long x = (long)val;
+        if(st.size() == 0)
+        {
+            st.push(x);
+            min = x;
+        }
+        else if(x >= min)
+            st.push(x);
+        else if(x < min)
+        {
+            st.push(2*x - min);
+            min = val;
+        }
+
     }
     
     public void pop() {
-        if(head == null)
+        
+        if(st.size() == 0) return;
+        else if(st.peek() >= min) st.pop();
+        else if(st.peek() < min)
         {
-            System.out.println("Stack is already empty!");
-            return;
+            long old = 2 * min - st.peek();
+            min = old;
+            st.pop();
         }
-
-        head = head.next;
-        size--;
     }
     
     public int top() {
-        if(head == null)
-        {
-            System.out.println("Stack is empty!");
-            return -1;
-        }
-        return head.val;
+        long q = st.peek();
+        if(st.size() == 0)
+        return -1;
+        else if(q >= min) 
+        return (int)q;
+        if(q < min) 
+        return (int) min;
+        return 0;
     }
     
     public int getMin() {
-        Node temp = head;
-        int min = Integer.MAX_VALUE;
-        
-        while(temp != null)
-        {
-            min = Math.min(temp.val, min);
-            temp = temp.next;
-        }
-        return min;
-    }
-}
-
-class Node {
-    int val;
-    Node next;
-    Node(int val)
-    {
-        this.val = val;
+        if(st.size() == 0) return -1;
+        return (int) min;
     }
 }
 
