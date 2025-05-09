@@ -3,7 +3,7 @@ class Solution {
         
         Stack<Character> st = new Stack<>();
 
-        for(int i = 0; i < s.length(); i++)
+        for(int i = s.length() - 1; i >= 0; i--)
         {
             char ch = s.charAt(i);
             if(st.size() > 0 && ch == st.peek())
@@ -16,9 +16,6 @@ class Solution {
         while(st.size() > 0)
         str.append(st.pop());
 
-        str.reverse();
         return str.toString();
-
-        
     }
 }
