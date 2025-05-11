@@ -7,8 +7,11 @@ class Solution {
         {
             if(arr[i] % 2 == 1)
             st.push(arr[i]);
-            else if(st.size() > 0 && arr[i] % 2 == 0)
-            st.pop();
+            else if(arr[i] % 2 == 0)
+            {
+                while(st.size() > 0)   
+                st.pop();
+            }
 
             if(st.size() == 3)
             return true;
