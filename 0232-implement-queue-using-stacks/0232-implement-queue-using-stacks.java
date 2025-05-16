@@ -30,10 +30,8 @@ class MyQueue {
         while(st.size() > 1)
         helper.push(st.pop());
 
-        // pop the first element
         int val = st.peek();
          
-        // helper -> st 
         while(helper.size() > 0)
         st.push(helper.pop());
 
