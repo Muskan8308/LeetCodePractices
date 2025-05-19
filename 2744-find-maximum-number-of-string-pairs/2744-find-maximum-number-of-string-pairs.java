@@ -5,8 +5,12 @@ class Solution {
         int cnt = 0;
         for(int i = 0; i < words.length; i++)
         {
-            if(set.contains(reverse(words[i])))
-            cnt++;
+            String rev = reverse(words[i]);
+            if(set.contains(rev))
+            {
+                cnt++;
+                set.remove(rev);
+            }
             else
             set.add(words[i]);
         }
