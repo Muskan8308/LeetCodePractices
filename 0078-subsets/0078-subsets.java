@@ -1,6 +1,6 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-    
+        
         return findSubsets(nums, 0, new ArrayList<>());
     }
 
@@ -13,15 +13,14 @@ class Solution {
             return list;
         }
 
-        // Inclusion - Including the current element 
+        // Inclusion
         currAns.add(nums[idx]);
-        list.addAll(findSubsets(nums, idx + 1, currAns));    
+        list.addAll(findSubsets(nums, idx+1, currAns));
 
-        // Exclusion - Excluding the current element 
+        // Exclusion
+        currAns.remove(currAns.size()-1);
+        list.addAll(findSubsets(nums, idx+1, currAns));
 
-        currAns.remove(currAns.size() - 1);
-        list.addAll(findSubsets(nums, idx + 1, currAns));             
-        
         return list;
     }
 }
