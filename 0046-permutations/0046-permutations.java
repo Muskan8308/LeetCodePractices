@@ -1,44 +1,38 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
         
-        return permuteHelper(nums,0);
-        
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        boolean[] isValid = new boolean[nums.length];
+
+        helper(nums, temp, isValid, ans);
+        return ans;
     }
 
-    private List<List<Integer>> permuteHelper(int[] nums, int start)
+    private List<List<Integer>> helper(int[] nums, List<Integer> temp, boolean[] isValid, List<List<Integer>> ans)
     {
-        List<List<Integer>> list = new ArrayList<>();
-
-        // base case 
-        if(start == nums.length)
+        // base case
+        if(temp.size() == nums.length)
         {
-            // add the permutation
-            list.add(new ArrayList<>(copyArrayToList(nums)));
-            return list;
+            List<Integer> list = new ArrayList<>();
+            for(int i = 0; i < temp.size(); i++)
+            list.add(temp.get(i));
+
+            ans.add(list);
+            return ans;
         }
 
-        for(int i = start; i < nums.length; i++)
+        for(int i = 0; i < nums.length; i++)
         {
-            swap(nums, start, i);       // swapping to fix nums[i] at start
-            list.addAll(permuteHelper(nums, start + 1));
-            swap(nums, start, i);       // Undo the swap i.e backtarck
+            if(isValid[i] == false)
+            {
+                temp.add(nums[i]);
+                isValid[i] = true;
+                helper(nums, temp, isValid, ans);
+                isValid[i] = false;
+                temp.remove(temp.size()-1);
+            }
         }
-        return list;
-    }
-
-    private void swap(int[] nums, int l, int r)
-    {
-        int temp = nums[l];
-        nums[l] = nums[r];
-        nums[r] = temp;
-    }
-
-    private List<Integer> copyArrayToList(int[] nums)
-    {
-        List<Integer> list = new ArrayList<>();
-        for(int num : nums)
-        list.add(num);
-
-        return list;
+        return ans;
     }
 }
