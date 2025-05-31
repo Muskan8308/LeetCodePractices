@@ -9,7 +9,7 @@ class Solution {
         return ans;
     }
 
-    private List<List<Integer>> helper(int[] nums, List<Integer> temp, boolean[] isValid, List<List<Integer>> ans)
+    private void helper(int[] nums, List<Integer> temp, boolean[] isValid, List<List<Integer>> ans)
     {
         // base case
         if(temp.size() == nums.length)
@@ -19,7 +19,7 @@ class Solution {
             list.add(temp.get(i));
 
             ans.add(list);
-            return ans;
+            return;
         }
 
         for(int i = 0; i < nums.length; i++)
@@ -33,6 +33,5 @@ class Solution {
                 temp.remove(temp.size()-1);
             }
         }
-        return ans;
     }
 }
