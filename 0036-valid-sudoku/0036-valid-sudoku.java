@@ -9,7 +9,7 @@ class Solution {
                 board[i][j] = '.';
                 if (!isValid(board, i, j, num))
                     return false;
-                board[i][j] = num;          // backtrack
+                board[i][j] = num;         
             }
         }
         return true;
