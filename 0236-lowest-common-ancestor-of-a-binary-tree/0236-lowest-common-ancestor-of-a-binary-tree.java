@@ -14,9 +14,9 @@ class Solution {
         if(p == q) return p;
         boolean leftP = contains(root.left, p);
         boolean rightQ = contains(root.right, q);
-        if((leftP && rightQ) || (!leftP && !rightQ)) return root;
-        if(leftP && !rightQ) return lowestCommonAncestor(root.left, p, q);
-        if(!leftP && rightQ) return lowestCommonAncestor(root.right, p, q);
+        if((leftP && rightQ) || (!leftP && !rightQ)) return root;       // basically, both p and q are in subtrees therefore LCA will be the root
+        if(leftP && !rightQ) return lowestCommonAncestor(root.left, p, q);      // if q is not in right subtree then definitely it will be in left subtree
+        if(!leftP && rightQ) return lowestCommonAncestor(root.right, p, q);     // if p is not in left subtree then definitely it will be in right subtree
         return root;
     }
 
