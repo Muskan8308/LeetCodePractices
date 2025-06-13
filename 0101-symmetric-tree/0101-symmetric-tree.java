@@ -1,5 +1,6 @@
 class Solution {
 
+    // It includes the logic of SAME TREE + INVERT TREE = SYMMETRIC TREE 
     public boolean isSame(TreeNode p, TreeNode q)
     {
         if(p == null && q == null) return true;
