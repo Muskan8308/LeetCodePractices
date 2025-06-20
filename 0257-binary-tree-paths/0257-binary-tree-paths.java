@@ -24,7 +24,7 @@ class Solution {
     {
         if(root == null) return;
         int len = s.length();
-        if(root.left == null  && root.right == null) 
+        if(root.left == null  && root.right == null)    // leaf node 
         {
             s.append(root.val);
             ans.add(s.toString());
@@ -33,6 +33,6 @@ class Solution {
         s.append(root.val).append("->");
         paths(root.left, ans, new StringBuilder(s));
         paths(root.right, ans, new StringBuilder(s));
-        s.setLength(len);
+        s.setLength(len);                               // set to original length
     }
 }
