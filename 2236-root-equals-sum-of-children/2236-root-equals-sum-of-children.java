@@ -18,5 +18,6 @@ class Solution {
         
         // iterative approach
         return root.val == (root.left.val + root.right.val);
+
     }
 }
