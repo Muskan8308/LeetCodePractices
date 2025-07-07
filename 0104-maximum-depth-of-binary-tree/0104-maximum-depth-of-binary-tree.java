@@ -16,8 +16,10 @@
 class Solution {
     public int maxDepth(TreeNode root) {
         
+        // Max Depth = No. of levels 
         if(root == null) return 0;
-        if(root.left == null && root.right == null) return 1;
+        if(root.left == null && root.right == null) return 1;           // leaf node
         return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+
     }
 }
