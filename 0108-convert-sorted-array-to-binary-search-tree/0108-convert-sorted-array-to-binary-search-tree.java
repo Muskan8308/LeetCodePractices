@@ -25,7 +25,7 @@ class Solution {
         
         int mid = l + (r-l) / 2;
         TreeNode root = new TreeNode(nums[mid]);
-        root.left = helper(nums, l, mid-1);                    // for left subtree
+        root.left = helper(nums, l, mid-1);          // for left subtree
         root.right = helper(nums, mid + 1, r);      // for right subtree
         return root;
     }
