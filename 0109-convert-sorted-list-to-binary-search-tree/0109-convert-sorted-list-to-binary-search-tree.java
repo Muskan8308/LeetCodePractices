@@ -26,36 +26,24 @@
 class Solution {
     public TreeNode sortedListToBST(ListNode head) {
         
-        ListNode temp = head;
-        int n = 0;
-        while(temp != null) 
+        if(head == null) return null;
+        if(head.next == null) return new TreeNode(head.val);
+
+        // finding the mid element
+        ListNode slow = head, fast = head, prev = null;
+
+        while(fast != null && fast.next != null)
         {
-            n++;
-            temp = temp.next;
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
-        int[] nums = new int[n];
-        int idx = 0;
-        temp = head;
+        if(prev != null) prev.next = null;           // (mid-1)th element
 
-        while(temp != null) 
-        {
-            nums[idx++] = temp.val;
-            temp = temp.next;
-        }
-        
-        return helper(nums, 0, n-1);
-    }
-
-    public TreeNode helper(int[] nums, int l, int h)
-    {
-        if(l > h) return null;
-
-        int mid = l + (h-l)/2;
-        TreeNode root = new TreeNode(nums[mid]);
-        root.left = helper(nums, l, mid-1);
-        root.right = helper(nums, mid+1, h);
-
+        TreeNode root = new TreeNode(slow);           // slow is at mid element
+        root.left = sortedListToBST(head);
+        root.right = sortedListToBST(slow.next);
         return root;
     }
 }
