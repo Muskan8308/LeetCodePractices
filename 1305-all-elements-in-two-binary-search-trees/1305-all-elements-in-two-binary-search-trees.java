@@ -19,8 +19,11 @@ class Solution {
         List<Integer> list1 = new ArrayList<>();
         List<Integer> list2 = new ArrayList<>();
 
-        inorder(root1, list1);
-        inorder(root2, list2);
+        // inorder(root1, list1);
+        // inorder(root2, list2);
+
+        morrisInorder(root1, list1);
+        morrisInorder(root2, list2);
 
         List<Integer> list = new ArrayList<>();
 
@@ -28,6 +31,38 @@ class Solution {
         return list;
     }
 
+    // Morris traversal
+    public void morrisInorder(TreeNode root, List<Integer> list)
+    {
+        TreeNode curr = root;
+        while(curr != null)
+        {
+            if(curr.left != null)
+            {
+                TreeNode pred = curr.left;
+                while(pred.right != null && pred.right != curr) pred = pred.right;
+
+                if(pred.right == null)      // make connections
+                {
+                    pred.right = curr;
+                    curr = curr.left;
+                }
+                if(pred.right == curr)      // remove connections
+                {
+                    pred.right = null;
+                    list.add(curr.val);
+                    curr = curr.right;
+                }
+            }
+            else
+            {
+                list.add(curr.val);
+                curr = curr.right; 
+            }
+        }
+    }
+
+    // Recursive traversal
     public void inorder(TreeNode root, List<Integer> list)
     {
         if(root == null) return;
