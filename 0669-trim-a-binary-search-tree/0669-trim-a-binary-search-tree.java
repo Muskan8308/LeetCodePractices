@@ -17,7 +17,7 @@ class Solution {
     public TreeNode trimBST(TreeNode root, int low, int high) {
         TreeNode parent = new TreeNode(Integer.MAX_VALUE);
         parent.left = root;
-        trim(parent.left, low, high);
+        trim(parent, low, high);
         return parent.left;
     }
 
