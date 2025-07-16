@@ -15,6 +15,16 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
+
+        List<TreeNode> pre = new ArrayList<>();
+        preorder(root, pre);
+        for(int i = 0; i < pre.size(); i++)
+        {
+            if(i != pre.size()-1) pre.get(i).right = pre.get(i+1);
+            pre.get(i).left = null; 
+        }
+
+     /*    
         // Using Morris Traversal technique
         // T.C -> O(N) & S.C -> O(1)
         TreeNode curr = root;
@@ -32,5 +42,16 @@ class Solution {
             }
             curr = curr.right;
         } 
+     */
+    }
+
+    public void preorder(TreeNode root, List<TreeNode> pre)
+    {
+        if(root == null) return;
+
+        pre.add(root);
+        preorder(root.left, pre);
+        preorder(root.right, pre);
+    
     }
 }
