@@ -15,7 +15,27 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
+        
+        // Approach 2 - Pure recursion without extra space
 
+        if(root == null) return;
+        TreeNode LST = root.left;
+        TreeNode RST = root.right;
+        flatten(root.left);
+        flatten(root.right);
+
+        root.left = null;
+        root.right = LST;
+
+        TreeNode temp = root;     
+        while(temp.right != null)
+        temp = temp.right;
+        
+        temp.right = RST;
+        
+
+        /*
+        // Approach 1
         List<TreeNode> pre = new ArrayList<>();
         preorder(root, pre);
         for(int i = 0; i < pre.size(); i++)
@@ -23,6 +43,7 @@ class Solution {
             if(i != pre.size()-1) pre.get(i).right = pre.get(i+1);
             pre.get(i).left = null; 
         }
+        */
 
      /*    
         // Using Morris Traversal technique
