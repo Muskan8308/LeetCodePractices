@@ -19,11 +19,11 @@ class Solution {
         List<Integer> list1 = new ArrayList<>();
         List<Integer> list2 = new ArrayList<>();
 
-        // inorder(root1, list1);
-        // inorder(root2, list2);
+        inorder(root1, list1);
+        inorder(root2, list2);
 
-        morrisInorder(root1, list1);
-        morrisInorder(root2, list2);
+        // morrisInorder(root1, list1);
+        // morrisInorder(root2, list2);
 
         List<Integer> list = new ArrayList<>();
 
