@@ -16,88 +16,54 @@
 class Solution {
     public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
         
-        List<Integer> list1 = new ArrayList<>();
-        List<Integer> list2 = new ArrayList<>();
+        List<Integer> l1 = new ArrayList<>();
+        List<Integer> l2 = new ArrayList<>();
+        List<Integer> l = new ArrayList<>();
 
-        inorder(root1, list1);
-        inorder(root2, list2);
+        inorder(root1, l1);
+        inorder(root2, l2);
 
-        // morrisInorder(root1, list1);
-        // morrisInorder(root2, list2);
+        merge(l1, l2, l);
+        return l;
 
-        List<Integer> list = new ArrayList<>();
-
-        merge(list1, list2, list);
-        return list;
     }
 
-    // Morris traversal
-    public void morrisInorder(TreeNode root, List<Integer> list)
-    {
-        TreeNode curr = root;
-        while(curr != null)
-        {
-            if(curr.left != null)
-            {
-                TreeNode pred = curr.left;
-                while(pred.right != null && pred.right != curr) pred = pred.right;
-
-                if(pred.right == null)      // make connections
-                {
-                    pred.right = curr;
-                    curr = curr.left;
-                }
-                if(pred.right == curr)      // remove connections
-                {
-                    pred.right = null;
-                    list.add(curr.val);
-                    curr = curr.right;
-                }
-            }
-            else
-            {
-                list.add(curr.val);
-                curr = curr.right; 
-            }
-        }
-    }
-
-    // Recursive traversal
-    public void inorder(TreeNode root, List<Integer> list)
+    private void inorder(TreeNode root, List<Integer> list)
     {
         if(root == null) return;
+
         inorder(root.left, list);
         list.add(root.val);
         inorder(root.right, list);
     }
 
-    public void merge(List<Integer> list1, List<Integer> list2, List<Integer> list)
+    private void merge(List<Integer> l1, List<Integer> l2, List<Integer> list)
     {
         int i = 0, j = 0;
-
-        while(i < list1.size() && j < list2.size())
+        while(i < l1.size() && j < l2.size())
         {
-            if(list1.get(i) <= list2.get(j))
+            if(l1.get(i) < l2.get(j))   
             {
-                list.add(list1.get(i));
+                list.add(l1.get(i));
                 i++;
             }
-            else
+            else   
             {
-                list.add(list2.get(j));
+                list.add(l2.get(j));
                 j++;
-            }
+            } 
+            
         }
 
-        while(i != list1.size())
+        while(i != l1.size())
         {
-            list.add(list1.get(i));
+            list.add(l1.get(i));
             i++;
         }
 
-        while(j != list2.size())
+        while(j != l2.size())
         {
-            list.add(list2.get(j));
+            list.add(l2.get(j));
             j++;
         }
     }
