@@ -14,8 +14,29 @@
  * }
  */
 class Solution {
+
+    private void kthEle(TreeNode root, int k, int[] cnt)
+    {
+        if(root == null) return;
+
+        kthEle(root.left, k, cnt);
+        cnt[0]++;
+        if(cnt[0] == k) 
+        {
+            cnt[0] = root.val;
+            return;
+        }
+        kthEle(root.right, k, cnt);
+  
+    } 
+
     public int kthSmallest(TreeNode root, int k) {
-        
+
+        int[] cnt = {0};
+        kthEle(root, k, cnt);
+        return cnt[0];
+
+       /* 
         int kthValue = 0;
         TreeNode curr = root;
 
@@ -49,5 +70,6 @@ class Solution {
             }
         }
         return kthValue;
+        */
     }
 }
