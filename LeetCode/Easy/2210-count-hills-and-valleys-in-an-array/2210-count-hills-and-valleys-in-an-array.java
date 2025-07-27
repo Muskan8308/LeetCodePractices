@@ -1,21 +1,17 @@
 class Solution {
     public int countHillValley(int[] nums) {
         
-        int i = 1, cnt = 0;
+        int j = 0, cnt = 0;
 
-        while(i < nums.length-1)
+        for(int i = 1; i < nums.length-1; i++)
         {
-            int j = i;
-            if(nums[j] == nums[j-1] || nums[j] == nums[j+1])
-            j++;
-            
-            if(nums[j] > nums[j-1] && nums[j] > nums[j+1])  // encountered a hill
-            cnt++;
-
-            if(nums[j] < nums[j-1] && nums[j] < nums[j+1])  // encountered a valley
-            cnt++;
-
-            i++;
+            if(nums[i] != nums[i+1])
+            {
+                if((nums[i] > nums[j] && nums[i] > nums[i+1]) 
+                || (nums[i] < nums[j] && nums[i] < nums[i+1]))  // encountered a hill or valley
+                cnt++;
+                j = i;
+            }  
         }
         return cnt;
     }
