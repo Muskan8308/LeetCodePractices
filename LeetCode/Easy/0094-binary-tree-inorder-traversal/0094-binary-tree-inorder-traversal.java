@@ -16,38 +16,35 @@
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         
-        // Morris Traversal
-
-        TreeNode curr = root;
         List<Integer> list = new ArrayList<>();
+        TreeNode curr = root;
 
         while(curr != null)
         {
-            if(curr.left != null)           // Finding predeccessor
+            if(curr.left != null)
             {
                 TreeNode pred = curr.left;
                 while(pred.right != null && pred.right != curr)
-                    pred = pred.right;
-                
-                if(pred.right == null)      // make/link temporary connections
+                pred = pred.right;
+
+                if(pred.right == null)
                 {
                     pred.right = curr;
                     curr = curr.left;
                 }
-                if(pred.right == curr)      // remove/unlink temporary connections
+                else if(pred.right == curr)
                 {
                     pred.right = null;
                     list.add(curr.val);
                     curr = curr.right;
                 }
             }
-            else
+            else 
             {
                 list.add(curr.val);
                 curr = curr.right;
             }
         }
-
         return list;
     }
 }
