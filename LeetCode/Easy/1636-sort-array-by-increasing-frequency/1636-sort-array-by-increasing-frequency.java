@@ -34,7 +34,7 @@ class Solution {
             pq.add(new Pair(ele, map.get(ele)));
         }
 
-        int[] ans = new int[nums.length];
+        // int[] ans = new int[nums.length];
 
         int idx = 0;
         while(pq.size() > 0)
@@ -42,10 +42,10 @@ class Solution {
             Pair p = pq.remove();
             while(p.freq > 0 && idx < nums.length)
             {
-                ans[idx++] = p.ele;
+                nums[idx++] = p.ele;
                 p.freq--;
             }
         }
-        return ans;
+        return nums;
     }
 }
