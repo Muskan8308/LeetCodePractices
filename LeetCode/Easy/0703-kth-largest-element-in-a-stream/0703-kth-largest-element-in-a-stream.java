@@ -4,7 +4,7 @@ class KthLargest {
     private int k;
 
     public KthLargest(int k, int[] nums) {
-        pq = new PriorityQueue<>();
+        pq = new PriorityQueue<>();         // MinHeap
         this.k = k;
 
         for(int ele : nums)
@@ -18,7 +18,7 @@ class KthLargest {
 
         pq.add(val);
         if(pq.size() > k) pq.remove();
-        
+
         return pq.peek();
     }
 }
