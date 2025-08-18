@@ -1,36 +1,56 @@
 class Solution {
+
+    public class Triplet implements Comparable<Triplet>{
+        int ele, row, col;
+        Triplet(int ele, int row, int col)
+        {
+            this.ele = ele;
+            this.row = row;
+            this.col = col;
+        }
+
+        public int compareTo(Triplet t)
+        {
+            return this.ele - t.ele;
+        }
+    }
+
+
     public int[] smallestRange(List<List<Integer>> nums) {
+        
+        int[] ans = {0, Integer.MAX_VALUE};
+        PriorityQueue<Triplet> pq = new PriorityQueue<>();
+        int maxRange = Integer.MIN_VALUE;
         int k = nums.size();
-                PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> a[0] - b[0]);
-                        int maxValue = Integer.MIN_VALUE;
-                                
-                                        // Initialize heap with the first element of each list
-                                                for (int i = 0; i < k; ++i) {
-                                                            minHeap.offer(new int[] {nums.get(i).get(0), i, 0});
-                                                                        maxValue = Math.max(maxValue, nums.get(i).get(0));
-                                                                                }
-                                                                                        
-                                                                                                int rangeStart = 0, rangeEnd = Integer.MAX_VALUE;
-                                                                                                        
-                                                                                                                while (!minHeap.isEmpty()) {
-                                                                                                                            int[] minElement = minHeap.poll();
-                                                                                                                                        int minValue = minElement[0], row = minElement[1], col = minElement[2];
-                                                                                                                                                    
-                                                                                                                                                                // Update the smallest range
-                                                                                                                                                                            if (maxValue - minValue < rangeEnd - rangeStart) {
-                                                                                                                                                                                            rangeStart = minValue;
-                                                                                                                                                                                                            rangeEnd = maxValue;
-                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                // Move to the next element in the current list
-                                                                                                                                                                                                                                                            if (col + 1 < nums.get(row).size()) {
-                                                                                                                                                                                                                                                                            minHeap.offer(new int[] {nums.get(row).get(col + 1), row, col + 1});
-                                                                                                                                                                                                                                                                                            maxValue = Math.max(maxValue, nums.get(row).get(col + 1));
-                                                                                                                                                                                                                                                                                                        } else {
-                                                                                                                                                                                                                                                                                                                        break; // One list is exhausted
-                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                            return new int[] {rangeStart, rangeEnd};
+
+        // Maintain a heap of size k
+        for(int i = 0; i < k; i++)
+        {
+            int ele = nums.get(i).get(0);           // basically -> arr[i][0]
+            pq.offer(new Triplet(ele, i, 0));
+            maxRange = Math.max(maxRange, ele);
+        }
+
+        // Find the minimum range 
+        while(true)
+        {
+            Triplet top = pq.poll();
+            int ele = top.ele, i = top.row, j = top.col;
+
+            // Update the minimum range 
+            if(maxRange - ele < ans[1] - ans[0])
+            {
+                ans[0] = ele;
+                ans[1] = maxRange;
+            }
+
+            if(j == nums.get(i).size() - 1)     // the last element of that list
+            break;
+            int next = nums.get(i).get(j+1);
+            maxRange = Math.max(maxRange, next);
+            pq.offer(new Triplet(next, i, j+1));
+        }
+
+        return ans;
     }
 }
