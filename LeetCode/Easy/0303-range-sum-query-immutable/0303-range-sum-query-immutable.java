@@ -1,5 +1,12 @@
 class NumArray {
 
+    /*
+        Very bad time complexity 
+        TC for one query = O(n)
+        TC for 'q' queries = O(q*n)
+        SC = O(n)
+    */
+
     int[] arr;
     public NumArray(int[] nums) {
         
