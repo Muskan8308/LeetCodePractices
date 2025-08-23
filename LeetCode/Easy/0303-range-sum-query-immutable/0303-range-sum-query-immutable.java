@@ -1,27 +1,26 @@
 class NumArray {
 
-    /*
-        Very bad time complexity 
-        TC for one query = O(n)
-        TC for 'q' queries = O(q*n)
-        SC = O(n)
-    */
+    int[] nums;
+    public NumArray(int[] arr) {
 
-    int[] arr;
-    public NumArray(int[] nums) {
-        
-        arr = nums;
+        nums = arr;         // shallow copy 
+        for(int i = 1; i < nums.length; i++)
+        nums[i] += nums[i-1];
     }
     
     public int sumRange(int left, int right) {
-        int sum = 0;
-        for(int i = left; i <= right; i++)
-        {
-            sum += arr[i];
-        }
-        return sum;
+        
+        if(left == 0) return nums[right];
+        return nums[right] - nums[left-1];
     }
 }
+
+/*
+    TC for prefix sum array = O(n)
+    TC for 'm' queries = O(m)
+    so, Total TC = O(m + n) ~ O(n)
+    SC = O(n) and AS = O(n) extra space
+*/
 
 /**
  * Your NumArray object will be instantiated and called as such:
