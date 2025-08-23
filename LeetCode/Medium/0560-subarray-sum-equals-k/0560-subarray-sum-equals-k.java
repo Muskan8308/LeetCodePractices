@@ -1,18 +1,20 @@
 class Solution {
     public int subarraySum(int[] nums, int k) {
-        
-        int prefSum = 0, count = 0;
+       
         HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);      // for valid calculations, for (prefSum - k) == 0 this subarray should also get counted
+        int count = 0;          // count of subarray
+        for(int i = 1; i < nums.length; i++)
+            nums[i] += nums[i-1]; 
 
+        // Traverse on the prefix array
         for(int i = 0; i < nums.length; i++)
         {
-            prefSum += nums[i];
-            if(map.containsKey(prefSum - k))
-            {
-                count += map.get(prefSum-k);
-            }
-            map.put(prefSum, map.getOrDefault(prefSum, 0) + 1);
+            int rem = nums[i] - k;  // sum of a subarray
+            
+            if(nums[i] == k) count++;
+            if(map.containsKey(rem)) count += map.get(rem);
+            if(map.containsKey(nums[i])) map.put(nums[i], map.get(nums[i])+1);
+            else  map.put(nums[i], 1);  
         }
         return count;
     }
