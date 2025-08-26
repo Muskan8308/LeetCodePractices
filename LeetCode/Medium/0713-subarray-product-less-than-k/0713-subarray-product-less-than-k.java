@@ -11,7 +11,7 @@ class Solution {
             while (i <= j && prod >= k)     
             prod /= nums[i++];              // reducing the product by eleminating the i_th element
 
-            cnt += j - i + 1;
+            cnt += j - i + 1;               // this adds current window's subarray
         }
         return cnt;
     }
