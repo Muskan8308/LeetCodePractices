@@ -8,7 +8,8 @@ class Solution {
             if(nums[j] == 1)
             {
                 len = j-i+1;
-                maxLen = Math.max(maxLen, len); 
+                maxLen = Math.max(maxLen, len);
+                j++; 
             }
 
             while(j < n && nums[j] == 0)
@@ -16,7 +17,7 @@ class Solution {
                 j++;
                 i = j;
             }
-            j++;
+           
         }
 
         return maxLen;
