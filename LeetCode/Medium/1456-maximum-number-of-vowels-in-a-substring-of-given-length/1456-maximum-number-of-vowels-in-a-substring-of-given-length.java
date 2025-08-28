@@ -6,25 +6,27 @@ class Solution {
         for(int i = 0; i < k; i++)
         {
             char c = s.charAt(i);
-            if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
-            cnt++;
+            if(isVowel(c)) cnt++;
         }
 
-        maxCnt = Math.max(maxCnt, cnt);
-        char ch = s.charAt(0);
-        if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') cnt--;
- 
+        maxCnt = cnt;
+
         int i = 1, j = k;
         while(j < n)
         {
-            char c = s.charAt(j);
-            if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') cnt++;
+            char c = s.charAt(j), x = s.charAt(i-1);
+            if(isVowel(c)) cnt++;
+            if(isVowel(x)) cnt--;
             maxCnt = Math.max(maxCnt, cnt);
             j++;
             i++;
-            char x = s.charAt(i-1);
-            if(x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u') cnt--;
         }
         return maxCnt;
+    }
+
+    private boolean isVowel(char ch)
+    {
+        if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') return true;
+        return false;
     }
 }
