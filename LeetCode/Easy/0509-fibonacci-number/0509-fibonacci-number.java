@@ -1,17 +1,15 @@
 class Solution {
-
     public int fib(int n) {
-        int[] dp = new int[n+1];
-        return fibo(n, dp);
-    }
-
-    private int fibo(int n, int[] dp)
-    {
+        
+        // Iterative DP - Tabulation
         if(n <= 1) return n;
+        int[] dp = new int[n+1];
 
-        if(dp[n] != 0) return dp[n];        // if val is already calculated then return the same, don't make further calls
-        int ans = fibo(n-1, dp) + fibo(n-2, dp);
-        dp[n] = ans;                // Before return, store that value/answer in the array
-        return ans;
+        dp[0] = 0; dp[1] = 1;
+        for(int i = 2; i <= n; i++)
+        {
+            dp[i] = dp[i-1] + dp[i-2]; 
+        }
+        return dp[n];
     }
 }
