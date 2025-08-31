@@ -10,7 +10,7 @@ class Solution {
         if(n <= 1) return n;
 
         if(dp[n] != 0) return dp[n];        // if val is already calculated then return the same, don't make further calls
-        int ans = fibo(n-1) + fibo(n-2);
+        int ans = fibo(n-1, dp) + fibo(n-2, dp);
         dp[n] = ans;                // Before return, store that value/answer in the array
         return ans;
     }
