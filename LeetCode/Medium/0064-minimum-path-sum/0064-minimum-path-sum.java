@@ -1,26 +1,19 @@
 class Solution {
     public int minPathSum(int[][] grid) {
+
+        int m = grid.length;
+        int n = grid[0].length;
+        int sum = 0;
+        return pathSum(grid, 0, 0, m, n);        
+    }
+
+    public int pathSum(int[][] grid, int i, int j, int m, int n) {
         
-        int[][] dp = grid;
-        int m = grid.length, n = grid[0].length;
+        if(i >= m || j >= n) return Integer.MAX_VALUE;
+        if(i == m-1 && j == n-1) return grid[i][j];
+        int rightSum = pathSum(grid, i, j+1, m, n);
+        int bottomSum = pathSum(grid, i+1, j, m, n);
 
-        // when row = 0, making prefix sum
-        for(int j = 1; j < n; j++)
-        dp[0][j] += dp[0][j-1];
-
-        // when col = 0, making prefix sum
-        for(int i = 1; i < m; i++)
-        dp[i][0] += dp[i-1][0];
-
-        // tabulation
-        for(int i = 1; i < m; i++)
-        {
-            for(int j = 1; j < n; j++)
-            {
-                dp[i][j] = dp[i][j] + Math.min(dp[i-1][j], dp[i][j-1]);
-            }
-        }
-
-        return dp[m-1][n-1];
+        return grid[i][j] + Math.min(rightSum, bottomSum);
     }
 }
