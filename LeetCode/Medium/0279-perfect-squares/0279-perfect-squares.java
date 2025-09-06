@@ -12,9 +12,9 @@ class Solution {
         if(dp[n] != -1) return dp[n];
 
         int min = Integer.MAX_VALUE;
-        for(int i = 1; i <= n/2; i++)
+        for(int i = 1; i*i <= n; i++)       // i < sqrt(n) => i^2 < n
         {
-            int cnt = minSquares(i, dp) + minSquares(n-i, dp);
+            int cnt = minSquares(i*i, dp) + minSquares(n-i*i, dp);
             min = Math.min(min, cnt);
         }
         return dp[n] = min;
