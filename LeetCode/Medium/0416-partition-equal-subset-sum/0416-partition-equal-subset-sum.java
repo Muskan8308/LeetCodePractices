@@ -9,7 +9,7 @@ class Solution {
         for(int[] arr : dp)
         Arrays.fill(arr, -1);
 
-        return partitions(nums, 0, sum % 2, dp);
+        return partitions(nums, 0, sum / 2, dp);
     }
 
     public boolean partitions(int[] nums, int idx, int sum, int[][] dp)
