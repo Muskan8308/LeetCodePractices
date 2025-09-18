@@ -1,16 +1,16 @@
 class Solution {
-
-    Map<Integer, Integer> memo = new HashMap<>();
-
     public int tribonacci(int n) {
-        if(n == 0) return 0;
-        if(n == 1 || n == 2) return 1;
+        
+        int[] dp = new int[n+1];
+        Arrays.fill(dp, -1);
+        return helper(n, dp);
+    }
 
-        if(memo.containsKey(n))
-            return memo.get(n);
-
-        int res = tribonacci(n-1) + tribonacci(n-2) + tribonacci(n-3);
-        memo.put(n, res);
-        return res;
+    public int helper(int n, int[] dp) {
+        
+        if(n == 0) return dp[n] = 0;
+        if(n == 1 || n == 2) return dp[n] = 1;
+        if(dp[n-1] != -1) return dp[n];
+        return dp[n] = helper(n-1, dp) + helper(n-2, dp) + helper(n-3, dp);
     }
 }
