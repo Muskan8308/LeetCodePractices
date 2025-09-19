@@ -2,13 +2,16 @@ class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
         
         int m = text1.length(), n = text2.length();
+        StringBuilder s1 = new StringBuilder(text1);
+        StringBuilder s2 = new StringBuilder(text2);
+
         int[][] dp = new int[m][n];
         for(int[] arr : dp) Arrays.fill(arr, -1);
 
-        return subSeq(text1, text2, m-1, n-1, dp);
+        return subSeq(s1, s2, m-1, n-1, dp);
     }
 
-    public int subSeq(String s1, String s2, int i1, int i2, int[][] dp) 
+    public int subSeq(StringBuilder s1, StringBuilder s2, int i1, int i2, int[][] dp) 
     {
         if(i1 < 0 || i2 < 0) return 0;
         if(dp[i1][i2] != -1) return dp[i1][i2];
