@@ -1,34 +1,35 @@
 class Solution {
-    public int minDistance(String word1, String word2) {
+    public int minDistance(String s, String t) {
 
-        StringBuilder s = new StringBuilder(word1);
-        StringBuilder t = new StringBuilder(word2);
         int m = s.length() , n = t.length();
+        if(m == 0 || n == 0) return 0;
 
         int[][] dp = new int[m][n];
 
-        for(int[] a : dp)
-        Arrays.fill(a, -1);
-
-        return minSteps(s, t, m-1, n-1, dp);
-
-    }
-
-    public int minSteps(StringBuilder s, StringBuilder t, int i, int j, int[][] dp) {
-        
-        if(i == -1) return j+1;
-        if(j == -1) return i+1;
-        if(dp[i][j] != -1) return dp[i][j];
-
-        if(s.charAt(i) == t.charAt(j))
-        return dp[i][j] = minSteps(s, t, i-1, j-1, dp);
-        else 
+        for(int i = 0; i < m; i++)
         {
-            int del = minSteps(s, t, i-1, j, dp);
-            int ins = minSteps(s, t, i, j-1, dp);
-            int rep = minSteps(s, t, i-1, j-1, dp);
-            return dp[i][j] = 1 + Math.min(del, Math.min(ins, rep));
+            for(int j = 0; j < n; j++)
+            {
+                
+                int p = (i > 0 && j > 0) ? dp[i-1][j-1] : (i == 0 ? j : i);
+                int q = (i > 0) ? dp[i-1][j] : j;
+                int r = (j > 0) ? dp[i][j-1] : i;
+
+                if(s.charAt(i) == t.charAt(j))
+                dp[i][j] = p;
+                else 
+                {
+                    int del = q;
+                    int ins = r;
+                    int rep = p;
+                    dp[i][j] = 1 + Math.min(del, Math.min(ins, rep));
+                }
+            }
         }
-        
+
+        return dp[m-1][n-1];
+
     }
+
+   
 }
