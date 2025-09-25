@@ -7,17 +7,18 @@ class Solution {
         int[][] dp = new int[n][n];
         for(int[] arr : dp) Arrays.fill(arr, -1);
 
-        return (n - minSteps(s, r, n-1, n-1, dp));
+        // If LPS is x and size of string is n, so the minimum insertions to make the whole string palindrome will be n - x.
+        return (n - LCS(s, r, n-1, n-1, dp));
 
     }
 
-    public int minSteps(String s, String r, int i, int j, int[][] dp)
+    public int LCS(String s, String r, int i, int j, int[][] dp)
     {
         if(i < 0 || j < 0) return 0;
         if(dp[i][j] != -1) return dp[i][j];
 
-        if(s.charAt(i) == r.charAt(j)) return dp[i][j] = 1 + minSteps(s, r, i-1, j-1, dp);
-        else return dp[i][j] = Math.max(minSteps(s, r, i, j-1, dp), minSteps(s, r, i-1, j, dp));
+        if(s.charAt(i) == r.charAt(j)) return dp[i][j] = 1 + LCS(s, r, i-1, j-1, dp);
+        else return dp[i][j] = Math.max(LCS(s, r, i, j-1, dp), LCS(s, r, i-1, j, dp));
     }
 
     public String rev(String s)
