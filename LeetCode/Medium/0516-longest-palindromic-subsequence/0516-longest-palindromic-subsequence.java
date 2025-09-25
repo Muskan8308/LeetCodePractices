@@ -3,16 +3,20 @@ class Solution {
         
         String r = reverse(s);
         int n = s.length();                // len(s) == len(r)
-        return longestSeq(s, r, n-1, n-1);
+        int[][] dp = new int[n][n];
+        for(int[] arr : dp) Arrays.fill(arr, -1);
+
+        return longestSeq(s, r, n-1, n-1, dp);
     }
 
-    public int longestSeq(String s, String r, int i, int j) 
+    public int longestSeq(String s, String r, int i, int j, int[][] dp) 
     {
         
         if(i < 0 || j < 0) return 0;
+        if(dp[i][j] != -1) return dp[i][j];
 
-        if(s.charAt(i) == r.charAt(j)) return 1 + longestSeq(s, r, i-1, j-1);
-        else return Math.max(longestSeq(s, r, i, j-1), longestSeq(s, r, i-1, j));
+        if(s.charAt(i) == r.charAt(j)) return dp[i][j] = 1 + longestSeq(s, r, i-1, j-1, dp);
+        else return dp[i][j] = Math.max(longestSeq(s, r, i, j-1, dp), longestSeq(s, r, i-1, j, dp));
     
     }
 
