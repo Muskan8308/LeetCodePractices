@@ -19,6 +19,20 @@ class Solution {
             }
         }
 
+        // We can also print the LCS which is also a question.
+        StringBuilder str = new StringBuilder("");
+        
+        int i = m, j = n;
+        while(i > 0 && j > 0)
+        {
+        	if(s[i-1] == t[j-1]) str.append(s[i-1]);
+        	if(dp[i][j-1] > dp[i-1][j]) j--;
+        	else i--;
+        }
+        
+        System.out.println(str.reverse());
+
+
         return dp[0][0];
     }
 
