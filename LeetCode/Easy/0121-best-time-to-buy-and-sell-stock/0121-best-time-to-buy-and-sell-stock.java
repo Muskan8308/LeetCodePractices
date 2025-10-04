@@ -10,6 +10,7 @@ class Solution {
         for(int price : prices)
         {
             minPrice = Math.min(minPrice, price);
+            
             maxProfit = Math.max(maxProfit, price - minPrice);
         }
 
