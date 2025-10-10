@@ -14,7 +14,7 @@ class Solution {
         String lcs = LCS(str1, str2);       // we'll get the lcs, here !!
         StringBuilder scs = new StringBuilder("");
         char[] s = str1.toCharArray(), t = str2.toCharArray(), l = lcs.toCharArray();       // Converting strings into arrays just for the sake of convenience !!
-        int m = s.length, n = t.length, p = r.length;
+        int m = s.length, n = t.length, p = l.length;
         int i = 0, j = 0, k = 0;
 
         while(i < m && j < n && k < p)
@@ -34,12 +34,17 @@ class Solution {
 
         // If any character remains of either str1 or str2 then we'll add them manually
 
-        while(t[j] != l[k])         // for string 2
-            {
-                scs.append(t[j++]);
-            }
-            
+        while(i < m)                // for string 1's remaining characters
+        {
+            scs.append(s[i++]);
+        }
+
+        while(j < n)                // for string 2's remaining characters
+        {
+            scs.append(t[j++]);
+        }
         
+        return scs.toString();
     }
 
     public String LCS(String str1, String str2) {
