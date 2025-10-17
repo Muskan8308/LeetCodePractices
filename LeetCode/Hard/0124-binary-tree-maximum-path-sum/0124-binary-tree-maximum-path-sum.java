@@ -15,26 +15,26 @@
  */
 class Solution {
 
-    static int maxSum;
+    // static int maxSum;
     public int maxPathSum(TreeNode root) {
         
-        maxSum = Integer.MIN_VALUE;
-        lineSum(root);
-        return maxSum;
+        int[] maxSum = {Integer.MIN_VALUE};
+        lineSum(root, maxSum);
+        return maxSum[0];
     }
 
-    private int lineSum(TreeNode root) {
+    private int lineSum(TreeNode root, int[] maxSum) {
         
         if(root == null) return 0;
-        int left = lineSum(root.left);
-        int right = lineSum(root.right);
+        int left = lineSum(root.left, maxSum);
+        int right = lineSum(root.right, maxSum);
         
-        int pathSum = root.val;
-        if(left > 0) pathSum += left;
+        int pathSum = root.val;         // pathsum of curr node = root + left + right
+        if(left > 0) pathSum += left;   // We will l and r node only if they are +ve 
         if(right > 0) pathSum += right;
 
-        maxSum = Math.max(maxSum, pathSum);
+        maxSum[0] = Math.max(maxSum[0], pathSum);
 
-        return root.val + Math.max(0, Math.max(left, right));
+        return root.val + Math.max(0, Math.max(left, right));   // if l or r is -ve then we will make it 0
     }
 }
