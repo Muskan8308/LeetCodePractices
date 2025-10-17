@@ -15,13 +15,17 @@
  */
 class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
+        
+        Map<TreeNode, Integer> map = new HashMap<>();
+        return diameter(root, map);
+    }
+
+    private int diameter(TreeNode root, Map<TreeNode, Integer> map) {
         if(root == null) return 0;
 
-        Map<TreeNode, Integer> map = new HashMap<>();
-
         int dia = levels(root.left, map) + levels(root.right, map);
-        int left = diameterOfBinaryTree(root.left);
-        int right = diameterOfBinaryTree(root.right);
+        int left = diameter(root.left, map);
+        int right = diameter(root.right, map);
 
         return Math.max(dia, Math.max(left, right));
     }
