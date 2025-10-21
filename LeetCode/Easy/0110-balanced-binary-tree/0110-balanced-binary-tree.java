@@ -16,21 +16,30 @@
 class Solution {
    
     public boolean isBalanced(TreeNode root) {
+
+        HashMap<TreeNode, Integer> dp = new HashMap<>();
+        return balanced(root, dp);        
+    }
+
+    public boolean balanced(TreeNode root, HashMap<TreeNode, Integer> dp) {
         if(root == null) return true;
 
-        int left = height(root.left);
-        int right = height(root.right);
+        int left = height(root.left, dp);
+        int right = height(root.right, dp);
 
         int ans = Math.abs(left - right);
         if(ans > 1) return false;
 
-        return isBalanced(root.left) && isBalanced(root.right);
+        return balanced(root.left, dp) && balanced(root.right, dp);
     }
 
-    public int height(TreeNode root) {
+    public int height(TreeNode root, HashMap<TreeNode, Integer> dp) {
         
         if(root == null) return 0;
-        return 1 + Math.max(height(root.left), height(root.right));
+        if(dp.containsKey(root)) return dp.get(root);
+
+        dp.put(root, 1 + Math.max(height(root.left, dp), height(root.right, dp)));
+        return dp.get(root);
     }
 
 }
