@@ -1,5 +1,7 @@
 class Solution {
 
+    // TC - O(n^2) & SC - O(n)
+
     public int minimumMountainRemovals(int[] nums) {
 
         int n = nums.length;
