@@ -1,28 +1,38 @@
 class Solution {
 
-    // public int singleNumber(int[] nums) {
-        
-    // }
-
-    // Using HashMap  TC - O(nlogn)  SC - O(logn)
+    // Best Approach - Bit Mask  TC - O(n)  SC - O(1)
     public int singleNumber(int[] nums) {
 
-        Map<Integer, Integer> map = new HashMap<>();
+        int ans = 0;
 
-        for(int i = 0; i < nums.length; i++)
+        for(int ele : nums)
         {
-            if(map.containsKey(nums[i]))
-            map.put(nums[i], 2);            // Since, each element can have atmost 2 as frequency 
-            else
-            map.put(nums[i], 1);
+            ans = ans ^ ele;
+            System.out.print(ans+" ");
         }
 
-        for(int key : map.keySet())
-        {
-            if(map.get(key) == 1) return key;
-        }
-        return 1;
+        return ans;
     }
+
+    // Using HashMap  TC - O(n)  SC - O(n)
+    // public int singleNumber(int[] nums) {
+
+    //     Map<Integer, Integer> map = new HashMap<>();
+
+    //     for(int i = 0; i < nums.length; i++)
+    //     {
+    //         if(map.containsKey(nums[i]))
+    //         map.put(nums[i], 2);            // Since, each element can have atmost 2 as frequency 
+    //         else
+    //         map.put(nums[i], 1);
+    //     }
+
+    //     for(int key : map.keySet())
+    //     {
+    //         if(map.get(key) == 1) return key;
+    //     }
+    //     return 1;
+    // }
 
     // Sorting Approach  TC - O(nlogn)  SC - O(logn)
     // public int singleNumber(int[] nums) {
