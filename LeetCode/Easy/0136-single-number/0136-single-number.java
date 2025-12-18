@@ -4,22 +4,38 @@ class Solution {
         
     // }
 
-    // public int singleNumber(int[] nums) {
-        
-    // }
-
-    // Sorting Approach
+    // Using HashMap  TC - O(nlogn)  SC - O(logn)
     public int singleNumber(int[] nums) {
 
-        Arrays.sort(nums);
+        Map<Integer, Integer> map = new HashMap<>();
 
-        for(int i = 0; i < nums.length-1; i += 2)
+        for(int i = 0; i < nums.length; i++)
         {
-            if(nums[i] != nums[i+1])
-            return nums[i];
+            if(map.containsKey(nums[i]))
+            map.put(nums[i], 2);            // Since, each element can have atmost 2 as frequency 
+            else
+            map.put(nums[i], 1);
         }
-        return nums[nums.length-1];
+
+        for(int key : map.keySet())
+        {
+            if(map.get(key) == 1) return key;
+        }
+        return 1;
     }
+
+    // Sorting Approach  TC - O(nlogn)  SC - O(logn)
+    // public int singleNumber(int[] nums) {
+
+    //     Arrays.sort(nums);
+
+    //     for(int i = 0; i < nums.length-1; i += 2)
+    //     {
+    //         if(nums[i] != nums[i+1])
+    //         return nums[i];
+    //     }
+    //     return nums[nums.length-1];
+    // }
 
     // Brute Force approach  TC - O(n^2)  SC - O(1)
     // public int singleNumber(int[] nums) {
