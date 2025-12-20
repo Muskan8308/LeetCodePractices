@@ -1,21 +1,13 @@
 class Solution {
     public boolean isPowerOfFour(int n) {
-        // Recursive approach
-        /*
-        if(n <= 0)  return false;
-        if(n == 1)  return true;
-        // if(n % 4 != 0)  return false;
-
-        return (n % 4 == 0) && isPowerOfFour(n / 4);
-        */
-
-        // Iterative approach
 
         if(n <= 0) return false;
+        return ((n & n-1) == 0) && isPerfect(n);
+    }
 
-        while(n % 4 == 0)
-        n /= 4;
+    public boolean isPerfect(int n) {
 
-        return n == 1;
+        int root = (int)Math.sqrt(n);
+        return (root * root == n);
     }
 }
