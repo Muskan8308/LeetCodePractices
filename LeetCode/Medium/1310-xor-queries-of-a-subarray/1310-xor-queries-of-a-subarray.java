@@ -1,30 +1,23 @@
 class Solution {
     public int[] xorQueries(int[] arr, int[][] queries) {
-
-        // firstly, we'll store the prefix xor of each element
+        
         int n = arr.length;
-        int[] pref = new int[n];
-        int[] ans = new int[queries.length];
-        pref[0] = arr[0];
+        int []pre = new int[n];
+        pre[0] = arr[0];
 
         for(int i = 1; i < n; i++)
         {
-            pref[i] = pref[i-1] ^ arr[i]; 
+            pre[i] = pre[i-1] ^ arr[i];
         }
 
-        // Now we'll computing xor of the queries
-
-        for(int i = 0; i < queries.length; i++)
+        int[] res = new int[queries.length];
+        for(int k = 0; k < queries.length; k++)
         {
-            int Qi = queries[i][0], Qj = queries[i][1];
-            if(Qi != 0)
-            ans[i] = pref[Qj] ^ pref[Qi-1];
-            else
-            ans[i] = pref[Qj];
+            int i = queries[k][0];
+            int j = queries[k][1];
+            if(i == 0) res[k] = pre[j];
+            else res[k] = pre[j] ^ pre[i-1];
         }
-
-        return ans;
+        return res;
     }
-
-   
 }
