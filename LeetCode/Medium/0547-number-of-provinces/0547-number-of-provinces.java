@@ -1,4 +1,7 @@
 class Solution {
+
+    // For adjacency matrix,  TC - O(n^2) in worst case 
+    // For adjacency list,    TC - O(V + 2E) in general case 
     public int findCircleNum(int[][] isConnected) {
         
         int n = isConnected.length;
