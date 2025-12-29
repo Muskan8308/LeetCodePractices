@@ -1,6 +1,8 @@
 class Solution {
     public boolean validPath(int n, int[][] edges, int source, int destination) {
 
+        if(source == destination) return true;
+
         // Create an adjacency list from the edges array
         List<List<Integer>> adj = new ArrayList<>();
 
@@ -35,6 +37,7 @@ class Solution {
                 {
                     q.add(ele);
                     vis[ele] = true;
+                    if(ele == des) return;
                 }
             }
         }
