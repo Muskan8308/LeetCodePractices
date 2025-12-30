@@ -19,28 +19,39 @@ class Solution {
         boolean[] vis = new boolean[n];
 
         vis[source] = true;
-        bfs(adj, vis, source, destination);
+        // bfs(adj, vis, source, destination);
+        dfs(adj, vis, source);
         return vis[destination];
     }
 
-    private void bfs(List<List<Integer>> adj, boolean[] vis, int source, int des)
+    private void dfs(List<List<Integer>> adj, boolean[] vis, int source)
     {
-        Queue<Integer> q = new LinkedList<>();
-        q.add(source);
+        vis[source] = true;
 
-        while(q.size() > 0)
+        for(int ele : adj.get(source))
         {
-            int front = q.remove();
-            for(int ele : adj.get(front))
-            {
-                if(!vis[ele])
-                {
-                    q.add(ele);
-                    vis[ele] = true;
-                    if(ele == des) return;
-                }
-            }
+            if(!vis[ele]) dfs(adj, vis, ele);
         }
     }
+
+    // private void bfs(List<List<Integer>> adj, boolean[] vis, int source, int des)
+    // {
+    //     Queue<Integer> q = new LinkedList<>();
+    //     q.add(source);
+
+    //     while(q.size() > 0)
+    //     {
+    //         int front = q.remove();
+    //         for(int ele : adj.get(front))
+    //         {
+    //             if(!vis[ele])
+    //             {
+    //                 q.add(ele);
+    //                 vis[ele] = true;
+    //                 if(ele == des) return;
+    //             }
+    //         }
+    //     }
+    // }
 
 }
