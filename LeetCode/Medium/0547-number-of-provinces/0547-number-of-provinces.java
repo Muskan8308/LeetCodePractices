@@ -12,32 +12,26 @@ class Solution {
         {
             if(!visited[i])
             {
-                bfs(i, visited, isConnected);
+                dfs(i, visited, isConnected);
                 cnt++;
             }
         }
         return cnt;
     }
 
-    private void bfs(int i, boolean[] vis, int[][] adj)
+    private void dfs(int i, boolean[] vis, int[][] adj)
     {
+        // No need for the halt condition as it will automatically return back when it will reach the alredy visited element
+        
         int n = adj.length;
-        Queue<Integer> q = new LinkedList<>();
         vis[i] = true;
-        q.add(i);
 
-        while(q.size() > 0)
+        for(int j = 0; j < n; j++)
         {
-            int front = q.remove();
-            for(int j = 0; j < n; j++)
+            if(adj[i][j] == 1 && vis[j] == false)
             {
-                if(adj[front][j] == 1 && vis[j] == false)
-                {
-                    q.add(j);
-                    vis[j] = true;
-                } 
-            }
+                dfs(j, vis, adj);
+            } 
         }
-
     }
 }
