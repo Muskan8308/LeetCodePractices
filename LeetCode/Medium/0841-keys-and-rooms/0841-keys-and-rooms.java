@@ -1,10 +1,13 @@
 class Solution {
+
+    // TC - O(V + E) or less than O(n^2)
+    // SC - O(n)
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
 
         int n = rooms.size();
         boolean[] visited = new boolean[n];
         visited[0] = true;
-        bfs(0, rooms, visited);
+        dfs(0, rooms, visited);
 
         for(boolean ele : visited)
         {
@@ -14,25 +17,35 @@ class Solution {
         return true;
     }
 
-    private void bfs(int start, List<List<Integer>> rooms, boolean[] vis)
+    private void dfs(int start, List<List<Integer>> rooms, boolean[] vis)
     {
-        Queue<Integer> q = new LinkedList<>();
-        q.add(start);
+        vis[start] = true;
 
-        while(q.size() > 0)
+        for(int ele : rooms.get(start))
         {
-            int front = q.remove();
-
-            for(int ele : rooms.get(front))
-            {
-                if(!vis[ele])
-                {
-                    vis[ele] = true;
-                    q.add(ele);
-                }
-            }
+            if(!vis[ele]) dfs(ele, rooms, vis);
         }
-
     }
+
+    // private void bfs(int start, List<List<Integer>> rooms, boolean[] vis)
+    // {
+    //     Queue<Integer> q = new LinkedList<>();
+    //     q.add(start);
+
+    //     while(q.size() > 0)
+    //     {
+    //         int front = q.remove();
+
+    //         for(int ele : rooms.get(front))
+    //         {
+    //             if(!vis[ele])
+    //             {
+    //                 vis[ele] = true;
+    //                 q.add(ele);
+    //             }
+    //         }
+    //     }
+
+    // }
 
 }
