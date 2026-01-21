@@ -46,6 +46,8 @@ class Solution {
         int[] res = new int[ans.size()];
         for(int i = 0; i < ans.size(); i++)
         res[i] = ans.get(i);
+
+        if(ans.size() != n) return new int[]{};
         return res;
     }
 }
