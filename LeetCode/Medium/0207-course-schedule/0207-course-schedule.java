@@ -1,10 +1,12 @@
 class Solution {
+
+    static boolean ans; 
     public boolean canFinish(int n, int[][] pre) {
 
+        ans = true;
         List<List<Integer>> adj = new ArrayList<>();
-        List<Integer> ans = new ArrayList<>();
-
-        int[] indeg = new int[n];
+        boolean[] vis = new boolean[n];
+        boolean[] path = new boolean[n];
 
         // convert the given array into adjacency list
 
@@ -15,33 +17,31 @@ class Solution {
         {
             int a = pre[i][0], b = pre[i][1];
             adj.get(b).add(a);
-            indeg[a]++;
+            // indeg[a]++;
         }
         
-        // implementing Kahn's algorithm
-        Queue<Integer> q = new LinkedList<>();
-
-        // find the node which has 0 as indegree
         for(int i = 0; i < n; i++)
         {
-            if(indeg[i] == 0)
-            q.add(i);
+           if(!vis[i]) dfs(adj, vis, path, i);
         }
+         
+        return ans;
+    }
 
-        while(q.size() > 0)
+    private void dfs(List<List<Integer>> adj, boolean[] vis, boolean[] path, int i)
+    {
+        vis[i] = true;
+        path[i] = true;
+
+        for(int ele : adj.get(i))
         {
-            int front = q.remove();
-            ans.add(front);
-            for(int ele : adj.get(front))
+            if(path[ele])
             {
-                indeg[ele]--;
-                if(indeg[ele] == 0)
-                {
-                    q.add(ele);
-                }
+                ans = false;
+                return;
             }
+            dfs(adj, vis, path, ele);
         }
-
-        return ans.size() == n;
+        path[i] = false;        // backtrack
     }
 }
